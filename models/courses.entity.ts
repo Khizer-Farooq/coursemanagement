@@ -2,8 +2,8 @@
 import {Table,Column,Model,DataType,ForeignKey,BelongsTo,BelongsToMany,HasMany, AllowNull,PrimaryKey} from 'sequelize-typescript';
 import { User } from './users.entity';
 import { type NonAttribute,type CreationOptional,type InferAttributes,type InferCreationAttributes, UUID, UUIDV1 } from 'sequelize';
-
-
+import { Module } from './modules.entity';
+import {Enrollment} from './enrollments.entity';
 @Table({
     tableName:'courses',
     timestamps:true,
@@ -43,4 +43,9 @@ export class Course extends Model<InferAttributes<Course>,InferCreationAttribute
     @BelongsTo(()=>User)
     declare user?: NonAttribute<User>
     
+    @HasMany(()=>Module)
+    declare modules?: NonAttribute<Module[]>
+
+    @BelongsToMany(()=>User,()=>Enrollment)
+    declare enrolledUsers?: NonAttribute<User[]>
 }
