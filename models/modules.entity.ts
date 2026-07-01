@@ -1,8 +1,8 @@
 
-import {Table,Column,Model,DataType,ForeignKey,BelongsTo,PrimaryKey} from 'sequelize-typescript';
+import {Table,Column,Model,DataType,ForeignKey,BelongsTo,PrimaryKey,HasMany} from 'sequelize-typescript';
 import { UUIDV1 } from 'sequelize';
 import { Course } from './courses.entity';
-
+import { Assignment } from './assignments.entity';
 
 @Table({
     tableName:'modules',
@@ -39,5 +39,8 @@ export class Module extends Model<Module>{
 
     @BelongsTo(()=>Course)
     declare course?: Course
+
+    @HasMany(()=>Assignment)
+    declare assignments?: Assignment[]
     
 }

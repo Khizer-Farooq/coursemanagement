@@ -3,6 +3,9 @@ import {Table,Column,Model,DataType,ForeignKey,BelongsTo,BelongsToMany,HasMany, 
 import { User } from './users.entity';
 import { UUIDV1 } from 'sequelize';
 import { Course } from './courses.entity';
+import { Module } from './modules.entity';
+import { Submission } from './submissions.entity';
+
 
 @Table({
     tableName:'assignments',
@@ -41,4 +44,9 @@ export class Assignment extends Model<Assignment>{
        @BelongsTo(()=>Course)
        declare course?: Course
     
+       @BelongsTo(()=>Module)
+         declare module?: Module
+
+    @HasMany(()=>Submission)
+    declare submissions?: Submission[]
 }
